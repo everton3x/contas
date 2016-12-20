@@ -574,7 +574,7 @@ table td
    float:left;
    margin-top:4px;
    border-radius:7px;
-   overflow:hidden;                                                                                                                                                                                              }
+   overflow:hidden;                                                                                                                                                                                           
 }
 form[name=create_database] .btn {
    display:block;
