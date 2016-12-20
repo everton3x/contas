@@ -32,7 +32,12 @@ class Receita {
         
         if(is_null($cod)){
             //cria uma nova receita
-            $this->save($this->insert($mes, $nome, $descricao, $valor, $vencimento, $recebido));
+            $this->save($this->insert($mes, $nome, $descricao, $valor, $vencimento));
+            
+            //salva recebimento
+            if(!is_null($recebido) || $recebido !== false){
+                $this->salvaRecebimento($this->cod, $recebido, $this->valor_inicial, "Recebimento automatizado!");
+            }
         }else{
             $this->cod = $cod;
             $this->load();
@@ -58,7 +63,6 @@ class Receita {
                     $this->valor_recebido = $this->recebimentostotal();
                     $this->saldo = $this->valor_atualizado - $this->valor_recebido;
                     $this->vencimento = ($row['vencimento'])? $row['vencimento'] : '0000-00-00';
-                    $this->recebido = ($row['recebido'])? $row['recebido'] : '0000-00-00';
                 }
             }else{
                 throw new PDOException("Não foi possível retornar dados da receita código {$this->cod}!");
@@ -132,14 +136,14 @@ class Receita {
           
     }
     
-    protected function insert(int $mes, string $receita, string $descricao, float $valor_inicial, string $vencimento, string $recebido) : PDOStatement {
-        $statement = $this->db->prepare("INSERT INTO receitas(mes, nome, descricao, valor_inicial, vencimento, recebido) VALUES(:mes, :nome, :descricao, :valor_inicial, :vencimento, :recebido)");
+//    protected function insert(int $mes, string $receita, string $descricao, float $valor_inicial, string $vencimento, string $recebido) : PDOStatement {
+    protected function insert(int $mes, string $receita, string $descricao, float $valor_inicial, string $vencimento) : PDOStatement {
+        $statement = $this->db->prepare("INSERT INTO receitas(mes, nome, descricao, valor_inicial, vencimento) VALUES(:mes, :nome, :descricao, :valor_inicial, :vencimento)");
         $statement->bindParam(':mes', $mes, PDO::PARAM_STR);
         $statement->bindParam(':nome', $receita, PDO::PARAM_STR);
         $statement->bindParam(':descricao', $descricao, PDO::PARAM_STR);
         $statement->bindParam(':valor_inicial', $valor_inicial, PDO::PARAM_STR);
         $statement->bindParam(':vencimento', $vencimento, PDO::PARAM_STR);
-        $statement->bindParam(':recebido', $recebido, PDO::PARAM_STR);
         
         return $statement;
     }

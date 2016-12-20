@@ -20,7 +20,7 @@ foreach ($_POST['mes'] as $i => $null) {
     $descricao = $_POST['descricao'] ?? '';
     $valor_inicial = $_POST['valor_inicial'][$i] ?? 0;
     $vencimento = $_POST['vencimento'][$i] ?? '';
-    $recebido = $_POST['recebido'][$i] ?? '';
+    $recebido = $_POST['recebido'][$i] ?? false;
     
     /*
      * Testa os falores recebidos
@@ -51,5 +51,6 @@ foreach ($_POST['mes'] as $i => $null) {
             $errors = new ArrayIterator(["Parcela $i/$parcelas: {$db->errorInfo()}"]);
             require 'out/errors.php';
         }
+        
     }
 }
