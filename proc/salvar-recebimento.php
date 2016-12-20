@@ -30,7 +30,7 @@ if($receita_cod === FALSE){
  */
 $ds = new Receita($db, $receita_cod);
 
-if($ds->salvaAlteracao($receita_cod, $data, $valor, $descricao)){
-    $msg = new ArrayIterator(["Alteração da receita $receita_cod salva com código {$db->lastInsertId()}"]);
+if($ds->salvaRecebimento($receita_cod, $data, $valor, $descricao)){
+    $msg = new ArrayIterator(["Recebimento da receita $receita_cod salva com código {$db->lastInsertId()}"]);
     require 'out/success.php';
 }

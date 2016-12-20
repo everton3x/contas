@@ -15,13 +15,13 @@ if($receita_cod === false){
 
 $receita = new Receita($db, $receita_cod);
 
-$alteracoes = $receita->alteracoes();
+$recebimentos = $receita->recebimentos();
 
-$total_alteracoes = formata_numero($receita->alteracoes);
+$total_recebimentos = formata_numero($receita->valor_recebido);
 
 /*
  * chamao output
  */
-require 'out/form-nova-alteracao-receita.php';
+require 'out/form-novo-recebimento.php';
 
-require 'out/tabela-alteracoes-receita.php';
+require 'out/tabela-recebimentos.php';

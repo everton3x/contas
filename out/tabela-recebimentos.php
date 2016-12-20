@@ -1,7 +1,7 @@
 <table class="ui selectable celled striped table">
     <thead>
         <tr>
-            <th colspan="4" class="center aligned">Alterações da Receita</th>
+            <th colspan="4" class="center aligned">Recebimentos</th>
         </tr>
         <tr>
             <th class="left aligned">Data</th>
@@ -11,7 +11,7 @@
     </thead>
     <tbody>
         <?php
-        foreach ($alteracoes as $item){
+        foreach ($recebimentos as $item){
             echo '<tr>';
             
             echo "<td>";
@@ -33,7 +33,7 @@
     <tfoot>
         <tr>
             <th class="left aligned" colspan="2">Total</th>
-            <th class="left aligned"><?=$total_alteracoes;?></th>
+            <th class="left aligned"><?=$total_recebimentos;?></th>
         </tr>
     </tfoot>
 </table>

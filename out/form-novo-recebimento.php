@@ -1,14 +1,14 @@
-<form class="ui form" action="index.php?acao=salvar-alteracao-receita" method="post">
-    <h4 class="ui dividing header">Nova previsão de receita</h4>
+<form class="ui form" action="index.php?acao=salvar-recebimento" method="post">
+    <h4 class="ui dividing header">Novo Recebimento</h4>
     
     <div class="required field">
         <label>Data</label>
-        <input type="date" name="data" required="" readonly="" value="<?=date('Y-m-d');?>">
+        <input type="date" name="data" required="" value="<?=date('Y-m-d');?>" autofocus="">
     </div>
     
     <div class="required field">
         <label>Valor</label>
-        <input type="number" name="valor" required="" step="0.01" autofocus="">
+        <input type="number" name="valor" required="" step="0.01">
     </div>
     
     <div class="field">

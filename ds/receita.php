@@ -55,7 +55,7 @@ class Receita {
                     $this->valor_inicial = $row['valor_inicial'];
                     $this->alteracoes = $this->alteracoesTotal();
                     $this->valor_atualizado = $this->valor_inicial + $this->alteracoes;
-                    $this->valor_recebido = rand(0,1000);
+                    $this->valor_recebido = $this->recebimentostotal();
                     $this->saldo = $this->valor_atualizado - $this->valor_recebido;
                     $this->vencimento = ($row['vencimento'])? $row['vencimento'] : '0000-00-00';
                     $this->recebido = ($row['recebido'])? $row['recebido'] : '0000-00-00';
@@ -167,8 +167,27 @@ class Receita {
         
     }
     
+    protected function recebimentosTotal() : float {
+        $statement = $this->db->prepare("SELECT SUM(valor) AS total FROM recebimentos WHERE receita = :cod");
+        $statement->bindParam(':cod', $this->cod);
+        
+        $statement->execute();
+        
+        return (float) $statement->fetchColumn();
+        
+    }
+    
     public function alteracoes() : ArrayIterator {
         $statement = $this->db->prepare("SELECT * FROM previsao_receita WHERE receita = :cod");
+        $statement->bindParam(':cod', $this->cod);
+        
+        $query = $statement->execute();
+        
+        return new ArrayIterator($statement->fetchAll(PDO::FETCH_ASSOC));
+    }
+    
+    public function recebimentos() : ArrayIterator {
+        $statement = $this->db->prepare("SELECT * FROM recebimentos WHERE receita = :cod");
         $statement->bindParam(':cod', $this->cod);
         
         $query = $statement->execute();
@@ -179,6 +198,19 @@ class Receita {
     public function salvaAlteracao(int $receita, string $data, float $valor, string $descricao) : bool {
         
         $statement = $this->db->prepare("INSERT INTO previsao_receita(data, valor, descricao, receita) VALUES(:data, :valor, :descricao, :receita)");
+        $statement->bindParam(':data', $data, PDO::PARAM_STR);
+        $statement->bindParam(':valor', $valor);
+        $statement->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+        $statement->bindParam(':receita', $receita, PDO::PARAM_INT);
+        
+        $this->save($statement);
+        
+        return true;
+    }
+    
+    public function salvaRecebimento(int $receita, string $data, float $valor, string $descricao) : bool {
+        
+        $statement = $this->db->prepare("INSERT INTO recebimentos(data, valor, descricao, receita) VALUES(:data, :valor, :descricao, :receita)");
         $statement->bindParam(':data', $data, PDO::PARAM_STR);
         $statement->bindParam(':valor', $valor);
         $statement->bindParam(':descricao', $descricao, PDO::PARAM_STR);
