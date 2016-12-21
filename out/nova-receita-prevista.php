@@ -5,7 +5,7 @@
         <input type="month" name="mes" required="" autofocus="" value="<?=date('Y-m');?>">
     </div>-->
 
-    <div class="ui action input">
+    <div class="ui action input" style="min-width: 0px; width: 100px;">
         <input type="number" name="parcelas" min="1" step="1" value="<?=$parcelas;?>" autofocus="">
         <button class="ui labeled icon button" type="submit" form="previsao" formaction="index.php?acao=nova-receita-prevista" formnovalidate="">
             <i class="cloud icon"></i>
