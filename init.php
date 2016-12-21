@@ -9,6 +9,8 @@ require 'lib/functions.php';
  * Carrega data sources
  */
 require 'ds/receita.php';
+require 'ds/mp.php';
+require 'ds/despesa.php';
 
 /*
  * Define handler para disparar erros como exceções

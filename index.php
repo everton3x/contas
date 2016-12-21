@@ -56,12 +56,12 @@ require 'init.php';
                 <i class="cloud upload icon"></i>
                 Receita
             </a>
-            <a class="item" href="index.php?nova-despesa-prevista">
+            <a class="item" href="index.php?acao=nova-despesa-prevista">
                 <i class="cloud download icon"></i>
                 Despesa
             </a>
             
-            <a class="item" href="index.php?listar-meios-pagamento">
+            <a class="item" href="index.php?acao=listar-meios-pagamento">
                 <i class="payment icon"></i>
                 Meios
             </a>
