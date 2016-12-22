@@ -16,11 +16,38 @@ require 'init.php';
         <script type="text/javascript" src="vendor/semantic/semantic.min.js"></script>
     </head>
     <body>
-        <p></p>
-        
-         
-        <div class="ui container">
-            
+        <!--sidebar-->
+        <div class="ui visible top horizontal inverted sidebar labeled icon fixed menu">
+            <a class="item" href="index.php">
+                <i class="home icon"></i>
+                Resumo
+            </a>
+            <a class="item" href="index.php?acao=nova-receita-prevista">
+                <i class="cloud upload icon"></i>
+                Receita
+            </a>
+            <a class="item" href="index.php?acao=nova-despesa-prevista">
+                <i class="cloud download icon"></i>
+                Despesa
+            </a>
+
+<!--            <a class="item" href="index.php?acao=listar-meios-pagamento">
+                <i class="payment icon"></i>
+                Meios
+            </a>-->
+            <a class="item" id="submenu-btn" href="index.php?acao=extras">
+                <i class="options icon"></i>
+                Mais
+            </a>
+
+        </div>
+       
+        <br>
+        <br>
+        <div class="pusher">
+            <p></p>
+            <div class="ui container">
+
                 <?php
                 try {
                     $processor = $_GET['acao'] ?? $_POST['acao'] ?? 'resumo';
@@ -38,34 +65,10 @@ require 'init.php';
                     require 'out/errors.php';
                 }
                 ?>
+            </div>
         </div>
-        
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-       
-        <!--sidebar-->
-        <div class="ui visible bottom horizontal inverted sidebar labeled icon fixed menu">
-            <a class="item" href="index.php">
-                <i class="home icon"></i>
-                Resumo
-            </a>
-            <a class="item" href="index.php?acao=nova-receita-prevista">
-                <i class="cloud upload icon"></i>
-                Receita
-            </a>
-            <a class="item" href="index.php?acao=nova-despesa-prevista">
-                <i class="cloud download icon"></i>
-                Despesa
-            </a>
-            
-            <a class="item" href="index.php?acao=listar-meios-pagamento">
-                <i class="payment icon"></i>
-                Meios
-            </a>
-        </div>
-        
+                <br>
+                <br>
+
     </body> 
 </html>
