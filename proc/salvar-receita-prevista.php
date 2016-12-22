@@ -42,14 +42,32 @@ foreach ($_POST['mes'] as $i => $null) {
         $errors = new ArrayIterator($errors);
         require 'out/errors.php';
     } else {
-        $nova = new Receita($db, null, (int) $mes, (string) $nome, (string) $descricao." ($i/$parcelas)", (float) $valor_inicial, (string) $vencimento, (string) $recebido);
+        /*
+         * Previsão
+         */
+//        $nova = new Receita($db, null, (int) $mes, (string) $nome, (string) $descricao." ($i/$parcelas)", (float) $valor_inicial, (string) $vencimento, (string) $recebido);
+        $receita = new Receita($db, null, (int) $mes, (string) $nome, (string) $descricao." ($i/$parcelas)", (float) $valor_inicial, (string) $vencimento);
 
-        if ($nova->cod > 0) {
-            $msg = new ArrayIterator(["Receita salva com código $nova->cod ($i/$parcelas)!"]);
+        if ($receita->cod > 0) {
+            $msg = new ArrayIterator(["Receita salva com código $receita->cod ($i/$parcelas)!"]);
             require 'out/success.php';
         } else {
             $errors = new ArrayIterator(["Parcela $i/$parcelas: {$db->errorInfo()}"]);
             require 'out/errors.php';
+        }
+        
+        /*
+         * recebimento
+         */
+        
+        if($recebido){
+            if($receita->salvaRecebimento($receita->cod, $recebido, $valor_inicial, $descricao)){
+                $msg = new ArrayIterator(["Recebimento salvo com código {$db->lastInsertId()} para receita $receita->cod ($i/$parcelas)!"]);
+                require 'out/success.php';
+            }else{
+                $errors = new ArrayIterator(["Parcela $i/$parcelas: {$db->errorInfo()}"]);
+                require 'out/errors.php';
+            }
         }
         
     }

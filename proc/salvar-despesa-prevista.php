@@ -65,7 +65,8 @@ foreach ($_POST['mes'] as $i => $null) {
                 $errors = new ArrayIterator(["Meio de pagamento $mp não encontrado: parcela $i/$parcelas"]);
                 require 'out/errors.php';
             } else {
-                $data = formata_data($gasto);
+//                $data = formata_data($gasto);
+                $data = $gasto;
                 
                 if ($ds->gastar($ds->cod, $mp, $data, $valor_inicial, $descricao)) {
                     $gasto_cod = $db->lastInsertId();
@@ -77,7 +78,8 @@ foreach ($_POST['mes'] as $i => $null) {
                      */
                     
                     if($pago){
-                        if($ds->pagar($gasto_cod, formata_data($pago))){
+//                        if($ds->pagar($gasto_cod, formata_data($pago))){
+                        if($ds->pagar($gasto_cod, $pago)){
                             $msg = new ArrayIterator(["Pagamento salvo com código $gasto_cod ($i/$parcelas)!"]);
                             require 'out/success.php';
                         }else{

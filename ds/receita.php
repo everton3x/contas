@@ -26,7 +26,7 @@ class Receita {
 
     protected $recebido;
     
-    public function __construct(PDO $db, int $cod = null, int $mes = null, string $nome = null, string $descricao = null, float $valor = null, string $vencimento = null, string $recebido = null) {
+    public function __construct(PDO $db, int $cod = null, int $mes = null, string $nome = null, string $descricao = null, float $valor = null, string $vencimento = null/*, string $recebido = null*/) {
         try{
             $this->db = $db;
         
@@ -34,10 +34,10 @@ class Receita {
             //cria uma nova receita
             $this->save($this->insert($mes, $nome, $descricao, $valor, $vencimento));
             
-            //salva recebimento
-            if(!is_null($recebido) || $recebido !== false){
-                $this->salvaRecebimento($this->cod, $recebido, $this->valor_inicial, "Recebimento automatizado!");
-            }
+//            //salva recebimento
+//            if(!is_null($recebido) || $recebido !== false){
+//                $this->salvaRecebimento($this->cod, $recebido, $this->valor_inicial, "Recebimento automatizado!");
+//            }
         }else{
             $this->cod = $cod;
             $this->load();
