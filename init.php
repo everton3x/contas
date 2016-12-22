@@ -11,6 +11,7 @@ require 'lib/functions.php';
 require 'ds/receita.php';
 require 'ds/mp.php';
 require 'ds/despesa.php';
+require 'ds/resultado.php';
 
 /*
  * Define handler para disparar erros como exceções

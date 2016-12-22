@@ -183,7 +183,7 @@ class Despesa {
         
     }
     
-    protected function gastoTotal() : float {
+    public function gastoTotal() : float {
         $statement = $this->db->prepare("SELECT SUM(valor) AS total FROM gasto WHERE despesa = :cod");
         $statement->bindParam(':cod', $this->cod);
         

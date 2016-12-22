@@ -86,7 +86,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <th class="left aligned">Total</td>
+            <th class="left aligned">Total</th>
             <th class="right aligned collapsing <?=$cor_total_previsto;?>"><?php echo formata_numero($total_previsto);?></th>
             <th class="right aligned collapsing <?=$cor_total_executado;?>"><?php echo formata_numero($total_executado);?></th>
             <th class="right aligned collapsing <?=$cor_total_saldo;?>"><?php echo formata_numero($total_saldo);?></th>

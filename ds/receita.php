@@ -171,7 +171,7 @@ class Receita {
         
     }
     
-    protected function recebimentosTotal() : float {
+    public function recebimentosTotal() : float {
         $statement = $this->db->prepare("SELECT SUM(valor) AS total FROM recebimentos WHERE receita = :cod");
         $statement->bindParam(':cod', $this->cod);
         

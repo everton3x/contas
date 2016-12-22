@@ -25,6 +25,24 @@ try {
     
     require 'out/resumo-despesas.php';
     
+    /*
+     * Monta tabela de resultados
+     */
+    $saldo_mes_atual = Resultado::atual($db, $mes);
+    $saldo_mes_anterior = Resultado::anterior($db, $mes);
+    if($mes > date('Ym')){
+        if($saldo_mes_anterior > 0){
+            $saldo_mes_anterior = 0;
+        }
+    }
+    $saldo_final = $saldo_mes_atual + $saldo_mes_anterior;
+    
+    $cor_mes = ($saldo_mes_atual < 0)? 'negative': 'positive';
+    $cor_anterior = ($saldo_mes_anterior < 0)? 'negative': 'positive';
+    $cor_final = ($saldo_final < 0)? 'negative': 'positive';
+    
+    require 'out/resumo-resultados.php';
+    
     
 } catch (Exception $ex) {
     throw $ex;
