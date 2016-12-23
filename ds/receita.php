@@ -232,4 +232,25 @@ class Receita {
         
         return new ArrayIterator($statement->fetchAll(PDO::FETCH_ASSOC));
     }
+    
+    public static function analitico(int $mes) : ArrayIterator {
+        global $db;
+        
+        $dados = [];
+        
+        /*
+         * receitas
+         */
+        $s = $db->prepare("SELECT * FROM receitas WHERE mes = :mes");
+        $s->bindParam(':mes', $mes);
+        if($s->execute()){
+//            foreach($s->fetchAll(PDO::FETCH_ASSOC) as $row){
+//                
+//            }
+            $dados = $s->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+        
+        return new ArrayIterator($dados);
+    }
 }
