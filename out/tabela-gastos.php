@@ -2,12 +2,13 @@
     <table class="ui selectable celled striped table">
         <thead>
             <tr>
-                <th colspan="4" class="center aligned">Gastos</th>
+                <th colspan="5" class="center aligned">Gastos</th>
             </tr>
             <tr>
                 <th class="left aligned">Data</th>
                 <th class="right aligned">Gasto</th>
                 <th class="left aligned">Descrição</th>
+                <th class="left aligned">Meio de Pagamento</th>
                 <th class="left aligned">Pago em</th>
             </tr>
         </thead>
@@ -29,6 +30,11 @@
                 echo $item['descricao'];
                 echo "</td>";
 
+                $o = new MeioPagamento($db, $item['mp']);
+                echo "<td>";
+                echo $o->mp;
+                echo "</td>";
+
                 echo "<td>";
                 echo ($item['pago']) ? formata_data($item['pago']) : "<div class='ui action input' style='min-width: 0px; width: 160px;'><input type='date' name='data[{$item['cod']}]'><button class='positive ui button' type='submit'>Salvar</button></div>";
                 echo "</td>";
@@ -39,9 +45,9 @@
         </tbody>
         <tfoot>
             <tr>
-                <th class="left aligned">Total</th>
-                <th class="left aligned"><?= $total_gasto; ?></th>
+                <th class="left aligned" colspan="2">Total</th>
                 <th class="left aligned"></th>
+                <th class="left aligned"><?= $total_gasto; ?></th>
                 <th class="left aligned"><?= $total_pago; ?></th>
             </tr>
         </tfoot>
