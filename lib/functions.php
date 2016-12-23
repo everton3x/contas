@@ -33,6 +33,17 @@ function formata_mes(int $mes) : string {
     return "$mes/$ano";
 }
 
+function formata_mes_para_input(int $mes) : string {
+    
+    if(strlen($mes) === 6){
+        $ano = substr($mes, 0, 4);
+        $mes = substr($mes, 4, 2);
+    }else{
+        throw new UnexpectedValueException("Mẽs $mes de tamanho inválido!");
+    }
+    return "$ano-$mes";
+}
+
 /**
  * Formata datas de AAAA-MM-DD para DD/MM/AAAA
  * @param string $data AAAA-MM-DD

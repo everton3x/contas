@@ -7,6 +7,12 @@
 $lista = MeioPagamento::listar();
 
 /*
+ * input
+ */
+
+$mes = $_POST['mes'] ?? date('Ym');
+$mes = desformata_mes($mes);
+/*
  * output
  */
 

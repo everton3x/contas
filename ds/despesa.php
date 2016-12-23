@@ -266,4 +266,39 @@ class Despesa {
         
         return new ArrayIterator($statement->fetchAll(PDO::FETCH_ASSOC));
     }
+    
+    public static function totaisPorMP(int $mp, int $mes) : array {
+        global $db;
+        $dados = [];
+        
+        /*
+         * gasto
+         */
+        $s = $db->prepare("SELECT SUM(gasto.valor) as total FROM gasto, despesas WHERE gasto.despesa = despesas.cod AND despesas.mes = :mes AND mp = :mp");
+        $s->bindParam(':mp', $mp, PDO::PARAM_INT);
+        $s->bindParam(':mes', $mes, PDO::PARAM_INT);
+        if($s->execute()){
+            foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $row){
+                $dados['gasto'] = $row['total'];
+            }
+        }else{
+            $dados['gasto'] = 0;
+        }
+        
+        /*
+         * pago
+         */
+        $s = $db->prepare("SELECT SUM(gasto.valor) as total FROM gasto, despesas WHERE gasto.despesa = despesas.cod AND despesas.mes = :mes AND mp = :mp AND (gasto.pago NOT LIKE '' OR gasto.pago IS NOT NULL)");
+        $s->bindParam(':mp', $mp, PDO::PARAM_INT);
+        $s->bindParam(':mes', $mes, PDO::PARAM_INT);
+        if($s->execute()){
+            foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $row){
+                $dados['pago'] = $row['total'];
+            }
+        }else{
+            $dados['pago'] = 0;
+        }
+        
+        return $dados;
+    }
 }
