@@ -11,7 +11,8 @@ class Resultado {
         $r->execute();
         foreach ($r->fetchAll(PDO::FETCH_ASSOC) as $row){
             $o = new Receita($db, $row['cod']);
-            $recebimentos += $o->recebimentosTotal();
+//            $recebimentos += $o->recebimentosTotal();
+            $recebimentos += $o->valor_atualizado;
         }
         
         /*
@@ -23,7 +24,8 @@ class Resultado {
         $g->execute();
         foreach ($g->fetchAll(PDO::FETCH_ASSOC) as $row){
             $o = new Despesa($db, $row['cod']);
-            $gastos += $o->gastoTotal();
+//            $gastos += $o->gastoTotal();
+            $gastos += $o->valor_atualizado;
         }
         
         return (float) ((float) $recebimentos - (float) $gastos);
