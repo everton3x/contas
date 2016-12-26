@@ -32,7 +32,7 @@
             $previsto = formata_numero($o->valor_atualizado);
             $data = date('Y-m-d');
             $saldo = $o->valor_atualizado - $o->valor_recebido;
-            $recebido = ($o->valor_recebido > 0)? formata_numero($o->valor_recebido) : "<div class='ui action input'><input type='number' name='valor[{$o->cod}]' step='0.01' form='salvar'><button type='submit' class='ui green button' form='salvar'>Salvar</button></div><input type='hidden' name='data[{$o->cod}]' value='$data' form='salvar'><input type='hidden' name='descricao[{$o->cod}]' value='{$o->descricao}' form='salvar'><input type='hidden' name='receita[{$o->cod}]' value='{$o->cod}' form='salvar'>";
+            $recebido = ($o->valor_recebido > 0)? formata_numero($o->valor_recebido) : "<div class='ui action input'><input type='date' name='data[{$o->cod}]' form='salvar'><button type='submit' class='ui green button' form='salvar'>Salvar</button></div><input type='hidden' name='valor[{$o->cod}]' value='{$o->saldo}' form='salvar'><input type='hidden' name='descricao[{$o->cod}]' value='{$o->descricao}' form='salvar'><input type='hidden' name='receita[{$o->cod}]' value='{$o->cod}' form='salvar'>";
             
             $saldof = formata_numero($saldo);
             echo '<tr>';

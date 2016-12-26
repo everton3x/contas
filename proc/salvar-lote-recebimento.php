@@ -1,5 +1,5 @@
 <?php
-
+//echo '<pre>', print_r($_POST), '<pre>'; exit();
 $datas = $_POST['data'] ??  false;
 $valores = $_POST['valor'] ??  false;
 $descricoes = $_POST['descricao'] ??  'Salvamento em lotes.';
@@ -12,7 +12,7 @@ foreach ($receitas as $cod => $receita){
     $_POST['descricao'] = $descricoes[$cod];
     $_POST['receita'] = $receitas[$cod];
     
-    if($_POST['valor'] != 0){
+    if($_POST['data'] != ''){
         require 'proc/salvar-recebimento.php';
         $contagem++;
     }
