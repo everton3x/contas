@@ -351,4 +351,20 @@ class Despesa {
         
         return new ArrayIterator($dados);
     }
+    
+    public static function despesaTotalPrevista(int $mes) : float {
+        global $db;
+        
+        $p = $db->prepare("SELECT SUM(valor_inicial) as total FROM despesas WHERE mes = :mes");
+        $p->bindParam(':mes', $mes);
+        $p->execute();
+        $previsto = $p->fetchColumn(0);
+        
+        $a = $db->prepare("SELECT SUM(previsao_despesa.valor) as total FROM previsao_despesa, despesas WHERE despesas.mes = :mes AND previsao_despesa.despesa = despesas.cod");
+        $a->bindParam(':mes', $mes);
+        $a->execute();
+        $alteracoes = $p->fetchColumn(0);
+        
+        return (float) $previsto + $alteracoes;
+    }
 }

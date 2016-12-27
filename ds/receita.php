@@ -253,4 +253,20 @@ class Receita {
         
         return new ArrayIterator($dados);
     }
+    
+    public static function receitaTotalPrevista(int $mes) : float {
+        global $db;
+        
+        $p = $db->prepare("SELECT SUM(valor_inicial) as total FROM receitas WHERE mes = :mes");
+        $p->bindParam(':mes', $mes);
+        $p->execute();
+        $previsto = $p->fetchColumn(0);
+        
+        $a = $db->prepare("SELECT SUM(previsao_receita.valor) as total FROM previsao_receita, receitas WHERE receitas.mes = :mes AND previsao_receita.receita = receitas.cod");
+        $a->bindParam(':mes', $mes);
+        $a->execute();
+        $alteracoes = $p->fetchColumn(0);
+        
+        return (float) $previsto + $alteracoes;
+    }
 }
