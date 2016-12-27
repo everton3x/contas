@@ -1,6 +1,7 @@
 <?php
 
 //echo '<pre>', print_r($_POST), '</pre>';
+//exit();
 
 $parcelas = count($_POST['mes']);
 
