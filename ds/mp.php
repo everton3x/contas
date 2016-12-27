@@ -82,4 +82,13 @@ class MeioPagamento {
         $s->execute();
         return (int) $s->rowCount();
     }
+    
+    public static function titulo(int $cod) : string {
+        global $db;
+        
+        $s = $db->prepare("SELECT mp FROM meios_pagamento WHERE cod = :cod");
+        $s->bindParam(':cod', $cod, PDO::PARAM_INT);
+        $s->execute();
+        return (string) $s->fetchColumn(0);
+    }
 }

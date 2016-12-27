@@ -14,7 +14,7 @@
 
     <div class="ui floating dropdown labeled search icon button" id="mp">
         <input type="hidden" name="mp" required="">
-        <i class="cloud upload icon"></i>
+        <i class="payment icon"></i>
         <span class="text">Selecione o meio de pagamento</span>
         <div class="menu">
             <?php

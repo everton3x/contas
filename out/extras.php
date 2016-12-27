@@ -18,7 +18,7 @@
     <div class="item">
     <i class="large bar chart middle aligned icon"></i>
     <div class="content">
-        <a class="header" href="index.php?acao=listar-despesas-gastos-pagamentos-analitico">Receitas, Gastos e Pagamentos</a>
+        <a class="header" href="index.php?acao=listar-despesas-gastos-pagamentos-analitico">Despesas, Gastos e Pagamentos</a>
       <div class="description">Mostra uma lista com as despesas, gastos e pagamentos, de forma analítica</div>
     </div>
   </div>

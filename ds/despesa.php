@@ -301,4 +301,47 @@ class Despesa {
         
         return $dados;
     }
+    
+    public static function analitico(int $mes) : ArrayIterator {
+        global $db;
+        
+        $dados = [];
+        
+        /*
+         * despesas
+         */
+        $s = $db->prepare("SELECT * FROM despesas WHERE mes = :mes");
+        $s->bindParam(':mes', $mes);
+        if($s->execute()){
+//            foreach($s->fetchAll(PDO::FETCH_ASSOC) as $row){
+//                
+//            }
+            $dados = $s->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+        
+        return new ArrayIterator($dados);
+    }
+    
+    public static function listarAnalitico(int $mes) : ArrayIterator {
+        global $db;
+        
+        $dados = [];
+        
+        $s = $db->prepare("SELECT despesas.cod AS despesa, despesas.nome AS nome, despesas.descricao AS descricao, despesas.vencimento AS vencimento, gasto.mp AS mp, gasto.valor AS valor, gasto.pago AS pago, gasto.cod AS gasto FROM despesas JOIN gasto ON despesas.cod = gasto.despesa WHERE despesas.mes = :mes");
+        $s->bindParam(':mes', $mes);
+        $s->execute();
+        foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $i => $row){
+            $dados[$i]['despesa'] = $row['despesa'];
+            $dados[$i]['gasto'] = $row['gasto'];
+            $dados[$i]['nome'] = $row['nome'];
+            $dados[$i]['descricao'] = $row['descricao'];
+            $dados[$i]['vencimento'] = $row['vencimento'];
+            $dados[$i]['mp'] = (is_null($row['mp']))? '' : MeioPagamento::titulo($row['mp']);
+            $dados[$i]['valor'] = $row['valor'];
+            $dados[$i]['pago'] = $row['pago'];
+        }
+        
+        return new ArrayIterator($dados);
+    }
 }
