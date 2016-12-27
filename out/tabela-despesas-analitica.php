@@ -35,7 +35,7 @@
             echo '<tr>';
             
             
-            echo "<td>$despesa $nome</td>";
+            echo "<td>$nome</td>";
             
             echo '<td>';
             echo $mp;
@@ -61,9 +61,3 @@
 </table>
 
 <form id="salvar" action="index.php?acao=salvar-lote-despesas" method="post"></form>
-
-<script>
-    $('.ui.floating.dropdown.labeled.search.icon.button').dropdown({
-        allowAdditions: false
-    });
-</script>

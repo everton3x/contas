@@ -323,13 +323,20 @@ class Despesa {
         return new ArrayIterator($dados);
     }
     
-    public static function listarAnalitico(int $mes) : ArrayIterator {
+    public static function listarAnalitico(int $mes, int $mp = null) : ArrayIterator {
         global $db;
         
         $dados = [];
         
-        $s = $db->prepare("SELECT despesas.cod AS despesa, despesas.nome AS nome, despesas.descricao AS descricao, despesas.vencimento AS vencimento, gasto.mp AS mp, gasto.valor AS valor, gasto.pago AS pago, gasto.cod AS gasto FROM despesas JOIN gasto ON despesas.cod = gasto.despesa WHERE despesas.mes = :mes");
-        $s->bindParam(':mes', $mes);
+        if($mp !== null){
+//            echo "mp $mp";
+            $s = $db->prepare("SELECT despesas.cod AS despesa, despesas.nome AS nome, despesas.descricao AS descricao, despesas.vencimento AS vencimento, gasto.mp AS mp, gasto.valor AS valor, gasto.pago AS pago, gasto.cod AS gasto FROM despesas JOIN gasto ON despesas.cod = gasto.despesa WHERE despesas.mes = :mes AND gasto.mp = :mp");
+            $s->bindParam(':mes', $mes);
+            $s->bindParam(':mp', $mp);
+        }else{
+            $s = $db->prepare("SELECT despesas.cod AS despesa, despesas.nome AS nome, despesas.descricao AS descricao, despesas.vencimento AS vencimento, gasto.mp AS mp, gasto.valor AS valor, gasto.pago AS pago, gasto.cod AS gasto FROM despesas JOIN gasto ON despesas.cod = gasto.despesa WHERE despesas.mes = :mes");
+            $s->bindParam(':mes', $mes);
+        }
         $s->execute();
         foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $i => $row){
             $dados[$i]['despesa'] = $row['despesa'];
