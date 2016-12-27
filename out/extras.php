@@ -32,10 +32,18 @@
     </div>
 
     <div class="item">
-        <i class="large signal middle aligned icon"></i>
+        <i class="large refresh middle aligned icon"></i>
         <div class="content">
             <a class="header" href="index.php?acao=lancar-receitas-parcelas">Lançar receita parcelada</a>
             <div class="description">Lança receita em parcelas fixas</div>
+        </div>
+    </div>
+
+    <div class="item">
+        <i class="large recycle middle aligned icon"></i>
+        <div class="content">
+            <a class="header" href="index.php?acao=lancar-despesas-parcelas">Lançar despesa parcelada</a>
+            <div class="description">Lança despesa em parcelas fixas</div>
         </div>
     </div>
 
