@@ -47,4 +47,12 @@
         </div>
     </div>
 
+    <div class="item">
+        <i class="large database middle aligned icon"></i>
+        <div class="content">
+            <a class="header" href="./db/phpliteadmin.php" target="_blank">Gerenciar dados (nova janela)</a>
+            <div class="description">Abre o sistema de gerenciamento do banco de dados.</div>
+        </div>
+    </div>
+
 </div>
