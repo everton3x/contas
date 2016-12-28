@@ -17,7 +17,8 @@ for($i = 0; $i < 11; $i++){
     $meses[$seguinte]['receita'] = Receita::receitaTotalPrevista($seguinte);
     $meses[$seguinte]['despesa'] = Despesa::despesaTotalPrevista($seguinte);
     $meses[$seguinte]['resultado_mes'] = Resultado::atual($db, $seguinte);
-    $meses[$seguinte]['resultado_anterior'] = Resultado::anterior($db, $seguinte);
+    $a = Resultado::anterior($db, $seguinte);
+    $meses[$seguinte]['resultado_anterior'] = ($a < 0)? $a : 0;
     $meses[$seguinte]['resultado_final'] = $meses[$seguinte]['resultado_mes'] + $meses[$seguinte]['resultado_anterior'];
     $base = $seguinte;
 }
