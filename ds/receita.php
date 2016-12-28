@@ -117,7 +117,7 @@ class Receita {
         try{
             global $db;
             
-            $query = $db->query("SELECT * FROM receitas WHERE mes = $mes");
+            $query = $db->query("SELECT * FROM receitas WHERE mes = $mes ORDER BY nome ASC");
             
 //            var_dump($query);
             
