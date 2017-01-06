@@ -117,7 +117,7 @@ class Receita {
         try{
             global $db;
             
-            $query = $db->query("SELECT * FROM receitas WHERE mes = $mes ORDER BY nome ASC");
+            $query = $db->query("SELECT * FROM receitas WHERE mes = $mes ORDER BY nome COLLATE NOCASE");
             
 //            var_dump($query);
             

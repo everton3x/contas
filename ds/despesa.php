@@ -127,7 +127,7 @@ class Despesa {
         try{
             global $db;
             
-            $query = $db->query("SELECT * FROM despesas WHERE mes = $mes ORDER BY nome ASC");
+            $query = $db->query("SELECT * FROM despesas WHERE mes = $mes ORDER BY nome COLLATE NOCASE");
             
 //            var_dump($query);
             
