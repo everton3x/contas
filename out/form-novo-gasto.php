@@ -12,24 +12,40 @@
         <input type="number" name="valor" required="" step="0.01">
     </div>
 
-    <div class="ui floating dropdown labeled search icon button" id="mp">
+<!--    <div class="ui floating dropdown labeled search icon button" id="mp">
         <input type="hidden" name="mp" required="">
         <i class="payment icon"></i>
         <span class="text">Selecione o meio de pagamento</span>
         <div class="menu">
             <?php
+//            $lista = MeioPagamento::listar();
+//
+//            while ($lista->valid()) {
+//                $item = $lista->current();
+//                echo "<div class=\"item\" data-value='{$item['cod']}' data-value='{$item['mp']}'>{$item['mp']}</div>";
+//                $lista->next();
+//            }
+            ?>
+
+        </div>
+    </div> -->
+
+    <div class="field">
+            <label>Meio de Pagamento</label>
+            <select name="mp">
+                <option></option>
+            <?php
             $lista = MeioPagamento::listar();
 
             while ($lista->valid()) {
                 $item = $lista->current();
-                echo "<div class=\"item\" data-value='{$item['cod']}' data-value='{$item['mp']}'>{$item['mp']}</div>";
+//                echo "<div class=\"item\" data-value='{$item['cod']}' data-value='{$item['mp']}'>{$item['mp']}</div>";
+                echo "<option value='{$item['cod']}'>{$item['mp']}</option>";
                 $lista->next();
             }
             ?>
-
+            </select>
         </div>
-    </div> 
-
     <div class="field">
         <label>Descrição</label>
         <input type="text" name="descricao">

@@ -2,23 +2,30 @@
 
     <h4 class="ui dividing header">Nova previsão de despesa</h4>
 
-    <div class="ui floating dropdown labeled search icon button" id="despesa">
+<!--    <div class="ui floating dropdown labeled search icon button" id="despesa">
         <input type="hidden" name="nome" required="">
         <i class="cloud upload icon"></i>
         <span class="text">Selecione a despesa</span>
-        <div class="menu">
+        <div class="menu">-->
+        <div class="required field">
+            <label>Despesa</label>
+            <input type="text" name="nome" required="" list="despesas" autofocus="">
+            
+            <datalist id="despesas">
             <?php
             $lista = Despesa::despesas();
 
             while ($lista->valid()) {
                 $item = $lista->current();
-                echo "<div class=\"item\">{$item['nome']}</div>";
+//                echo "<div class=\"item\">{$item['nome']}</div>";
+                echo "<option value='{$item['nome']}'>";
                 $lista->next();
             }
             ?>
-
+            </datalist>
         </div>
-    </div>
+<!--        </div>
+    </div>-->
 
     <div class="field">
         <label>Descrição</label>
@@ -45,23 +52,30 @@
         <input type="date" name="gastar">
     </div>
     
-    <div class="ui floating dropdown labeled search icon button" id="mp">
-        <input type="hidden" name="mp" required="">
+<!--    <div class="ui floating dropdown labeled search icon button" id="mp">
+        <input type="hidden" name="mp">
         <i class="payment icon"></i>
         <span class="text">Selecione o meio de pagamento</span>
-        <div class="menu">
+        <div class="menu">-->
+        <div class="field">
+            <label>Meio de Pagamento</label>
+            <select name="mp">
+                <option></option>
             <?php
             $lista = MeioPagamento::listar();
 
             while ($lista->valid()) {
                 $item = $lista->current();
-                echo "<div class=\"item\" data-value='{$item['cod']}' data-value='{$item['mp']}'>{$item['mp']}</div>";
+//                echo "<div class=\"item\" data-value='{$item['cod']}' data-value='{$item['mp']}'>{$item['mp']}</div>";
+                echo "<option value='{$item['cod']}'>{$item['mp']}</option>";
                 $lista->next();
             }
             ?>
-
+            </select>
         </div>
-    </div> 
+<!--
+        </div>
+    </div> -->
 
     <div class="ui buttons">
         <button class="ui positive button" type="submit">Salvar</button>

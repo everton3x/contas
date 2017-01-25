@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Pega input
  */
@@ -10,6 +9,7 @@ $descricao = $_POST['descricao'] ?? 'Nenhuma descrição';
 $despesa_cod = $_POST['despesa'] ?? false;
 $mp = $_POST['mp'] ?? false;
 $pago = $_POST['pago'] ?? false;
+
 
 /*
  * Testa input

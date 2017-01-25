@@ -22,6 +22,7 @@ foreach ($_POST['mes'] as $i => $null) {
     $pago = $_POST['pago'][$i] ?? false;
     $mp = $_POST['mp'] ?? false;
     
+    
     /*
      * Testa os falores recebidos
      */
