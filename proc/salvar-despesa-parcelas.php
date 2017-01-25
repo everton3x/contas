@@ -9,6 +9,8 @@ $mes = $_POST['mes'] ?? false;
 (int) $parcelas = $_POST['parcelas'] ?? false;
 $total = $_POST['total'] ?? false;
 $mes = desformata_mes($mes);
+$mp = $_POST['mp'] ?? '';
+$gastar = $_POST['gastar'] ?? '';
 
 $errors = [];
 
@@ -28,7 +30,12 @@ if($total === 0){
     $errors[] = 'Nenhum valor informado!';
 }
 
+if($gastar !== '' && $mp === ''){
+    $errors[] = 'Você indicou gastar, mas não indicou um meio de pagamento!';
+}
+
 if(count($errors) > 0){
+    $errors = new ArrayIterator($errors);
     require 'out/errors.php';
 }else{
     unset($_POST);
@@ -42,10 +49,11 @@ if(count($errors) > 0){
         $mes = mes_seguinte($mes);
         $_POST['valor_inicial'][$i] = $valor;
         $_POST['vencimento'][$i] = '';
-        $_POST['gasto'][$i] = '';
+        $_POST['gasto'][$i] = $gastar;
         $_POST['pago'][$i] = '';
-        $_POST['mp'][$i] = '';
+        $_POST['mp'] = $mp;
 //        echo '<pre>', print_r($_POST), '</pre><hr>';
+        
     }
     require 'proc/salvar-despesa-prevista.php';
 //    echo '<pre>', print_r($_POST), '</pre><hr>';

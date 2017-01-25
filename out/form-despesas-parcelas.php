@@ -39,6 +39,29 @@
         <label>Valor total</label>
         <input type="number" name="total" required="" step="0.01">
     </div>
+    
+    <div class="field">
+        <label>Gasto</label>
+        <input type="date" name="gastar">
+    </div>
+    
+    <div class="ui floating dropdown labeled search icon button" id="mp">
+        <input type="hidden" name="mp" required="">
+        <i class="payment icon"></i>
+        <span class="text">Selecione o meio de pagamento</span>
+        <div class="menu">
+            <?php
+            $lista = MeioPagamento::listar();
+
+            while ($lista->valid()) {
+                $item = $lista->current();
+                echo "<div class=\"item\" data-value='{$item['cod']}' data-value='{$item['mp']}'>{$item['mp']}</div>";
+                $lista->next();
+            }
+            ?>
+
+        </div>
+    </div> 
 
     <div class="ui buttons">
         <button class="ui positive button" type="submit">Salvar</button>
